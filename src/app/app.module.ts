@@ -5,6 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ApolloModule } from 'angular2-apollo';
 import { EmojifyModule } from 'angular2-emojify';
+import {ButtonModule} from 'primeng/components/button/button';
+import {DataListModule} from 'primeng/components/datalist/datalist';
+import {TabMenuModule} from 'primeng/components/tabmenu/tabmenu';
+import {MessagesModule} from 'primeng/components/messages/messages';
+import {InputTextModule} from 'primeng/components/inputtext/inputtext';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -33,12 +38,23 @@ import { InfiniteScrollModule } from 'angular2-infinite-scroll';
   imports: [
     BrowserModule,
     FormsModule,
+    ButtonModule,
+    DataListModule,
+    MessagesModule,
+    TabMenuModule,
+    InputTextModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     ApolloModule.withClient(provideClient),
     EmojifyModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    RouterModule.forChild([
+            {path:'',component: NavigationComponent}
+        ])
   ],
-  bootstrap: [ AppComponent ],
+    exports: [
+        RouterModule
+    ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule {}

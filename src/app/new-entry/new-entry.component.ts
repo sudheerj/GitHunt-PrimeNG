@@ -5,6 +5,7 @@ import {Angular2Apollo} from 'angular2-apollo';
 import 'rxjs/add/operator/toPromise';
 
 import {submitRepositoryMutation} from './new-entry.model';
+import {Message} from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-new-entry',
@@ -13,6 +14,7 @@ import {submitRepositoryMutation} from './new-entry.model';
 export class NewEntryComponent {
   public error: string;
   public repoFullName: string;
+  public msgs: Message[] = [];
 
   constructor(private router: Router,
               private apollo: Angular2Apollo) {
@@ -36,6 +38,7 @@ export class NewEntryComponent {
         this.router.navigate(['/feed/new']);
       }).catch((error) => {
         this.error = error.message;
+        this.msgs.push({severity:'error', summary:'Error Message', detail:this.error});
       });
   }
 }

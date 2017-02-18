@@ -21,7 +21,7 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   private type: Subject<string> = new Subject<string>();
   private offset: number = 0;
-  private itemsPerPage: number = 10;
+  private itemsPerPage: number = 5;
   private feedSub: Subscription;
   private feedObs: ApolloQueryObservable<any>;
 
@@ -77,6 +77,15 @@ export class FeedComponent implements OnInit, OnDestroy {
         this.offset += this.itemsPerPage;
       });
   }
+    
+  loadData(event) {
+     //event.first = First row offset
+    //event.rows = Number of rows per page
+     //this.offset = event.first;
+     //this.itemsPerPage = event.rows;
+    // console.log("offset="+this.offset+"rows="+this.itemsPerPage);
+     //this.fetchMore();
+}
 
   public ngOnDestroy(): void {
     this.feedSub.unsubscribe();
@@ -89,9 +98,9 @@ function pushEntries<T>(prev: any, data: any): T {
   if (!data) {
     return prev;
   }
-
   return Object.assign({}, prev, {
     feed: [...prev.feed, ...data.feed],
   });
+  
 }
 

@@ -14,16 +14,12 @@
         placeholder="apollostack/GitHunt"
         [(ngModel)]="repoFullName"
         name="repoFullName"
-        required
+        required pInputText
       />
     </div>
+	<p-messages [value]="msgs"></p-messages>
 
-    <div *ngIf="error" class="alert alert-danger" role="alert">
-      {{ error }}
-    </div>
-
-    <button type="submit" class="btn btn-primary">
-      Submit
+    <button type="submit" label="Submit" pButton>
     </button>
   </form>
 </div>

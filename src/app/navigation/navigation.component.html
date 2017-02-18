@@ -1,33 +1,4 @@
-<nav class="navbar navbar-default">
   <div class="container">
-    <div class="navbar-header" routerLinkActive="active">
-      <a routerLink="/feed/top" class="navbar-brand">GitHunt</a>
-    </div>
-
-    <ul class="nav navbar-nav">
-      <li routerLinkActive="active">
-        <a
-          title="Top"
-          routerLink="/feed/top">
-          Top
-        </a>
-      </li>
-      <li routerLinkActive="active">
-        <a
-          title="Hot"
-          routerLink="/feed/hot">
-          Hot
-        </a>
-      </li>
-      <li routerLinkActive="active">
-        <a
-          title="New"
-          routerLink="/feed/new">
-          New
-        </a>
-      </li>
-    </ul>
-
+   <p-tabMenu [model]="items"></p-tabMenu>
     <app-profile></app-profile>
   </div>
-</nav>

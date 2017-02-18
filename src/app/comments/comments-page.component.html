@@ -1,52 +1,41 @@
 <app-loading *ngIf="loading"></app-loading>
 <div *ngIf="!loading">
-  <div>
-    <h1>Comments for <a [href]="entry.repository.html_url">{{entry.repository.full_name}}</a></h1>
-    <app-repo-info
-      [fullName]="entry.repository.full_name"
-      [description]="entry.repository.description"
-      [stargazersCount]="entry.repository.stargazers_count"
-      [openIssuesCount]="entry.repository.open_issues_count"
-      [createdAt]="entry.createdAt"
-      [userUrl]="entry.postedBy.html_url"
-      [username]="entry.postedBy.login"
-      [commentCount]="entry.commentCount">
-    </app-repo-info>
-    <form *ngIf="currentUser" (ngSubmit)="submitForm()">
-      <div class="form-group">
-        <input
-          type="text"
-          class="form-control"
-          id="newComment"
-          name="newCommentContent"
-          [(ngModel)]="newComment"
-          placeholder="Write your comment here!"
-        />
-      </div>
-      <div *ngIf="errors" class="alert alert-danger" role="alert">
-        {{errors[0].message}}
-      </div>
-      <div *ngIf="noCommentContent" class="alert alert-danger" role="alert">
-        Comment must have content.
-      </div>
-      <button type="submit" class="btn btn-primary">
-        Submit
-      </button>
-    </form>
-    <div *ngIf="!currentUser"><em>Log in to comment.</em></div>
-  </div>
-  <br/>
-  <div *ngIf="entry.comments"
-       infinite-scroll
+	<div>
+		<h1>
+			Comments for <a [href]="entry.repository.html_url">{{entry.repository.full_name}}</a>
+		</h1>
+		<app-repo-info [fullName]="entry.repository.full_name"
+			[description]="entry.repository.description"
+			[stargazersCount]="entry.repository.stargazers_count"
+			[openIssuesCount]="entry.repository.open_issues_count"
+			[createdAt]="entry.createdAt" [userUrl]="entry.postedBy.html_url"
+			[username]="entry.postedBy.login" [commentCount]="entry.commentCount">
+		</app-repo-info>
+		<form *ngIf="currentUser" (ngSubmit)="submitForm()">
+			<div class="form-group">
+				<input type="text" class="form-control" id="newComment"
+					name="newCommentContent" [(ngModel)]="newComment"
+					placeholder="Write your comment here!" pInputText />
+			</div>
+			<div *ngIf="errors" class="alert alert-danger" role="alert">
+				{{errors[0].message}}</div>
+			<div *ngIf="noCommentContent" class="alert alert-danger" role="alert">
+				Comment must have content.</div>
+			<button type="submit" label="Submit" pButton></button>
+		</form>
+		<div *ngIf="!currentUser">
+			<em>Log in to comment.</em>
+		</div>
+	</div>
+	<br />
+	<div *ngIf="entry.comments"
+		infinite-scroll
        [infiniteScrollDistance]="0.2"
-       (scrolled)="loadMore()">
-    <app-comment
-      *ngFor="let comment of entry.comments"
-      [username]="comment.postedBy.login"
-      [content]="comment.content"
-      [createdAt]="comment.createdAt"
-      [userUrl]="comment.postedBy.html_url">
-    </app-comment>
-  </div>
-  <app-loading *ngIf="loadingMoreComments"></app-loading>
+		(scrolled)="loadMore()">
+		<app-comment *ngFor="let comment of entry.comments"
+			[username]="comment.postedBy.login" [content]="comment.content"
+			[createdAt]="comment.createdAt" [userUrl]="comment.postedBy.html_url">
+		</app-comment>
+	</div>
+	<app-loading *ngIf="loadingMoreComments"></app-loading>
 </div>

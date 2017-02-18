@@ -1,11 +1,23 @@
 <app-loading *ngIf="loading"></app-loading>
 <div *ngIf="!loading">
-  <app-feed-entry
-    *ngFor="let entry of feed"
-    [entry]="entry"
-    [currentUser]="currentUser"
-    (onVote)="onVote($event)">
-  </app-feed-entry>
-
-  <a (click)="fetchMore()">Load more</a>
+	<p-dataList [value]="feed" >
+	<p-header> List of Github Repos </p-header> 
+	<template let-entry pTemplate="item">
+	<div class="ui-grid ui-grid-responsive ui-fluid"
+		style="font-size: 16px; padding: 20px; border-bottom: 1px solid #D5D5D5;">
+		<div class="ui-grid-row">
+			
+			<div class="ui-grid-col-9">
+				<div class="ui-grid ui-grid-responsive ui-fluid">
+					<app-feed-entry  [entry]="entry"
+						[currentUser]="currentUser" (onVote)="onVote($event)">
+					</app-feed-entry>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+	</template> 
+	</p-dataList>
+<a (click)="fetchMore()">Load more</a>
 </div>
